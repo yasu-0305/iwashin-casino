@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071b32">
+<meta name="description" content="イワシんと氷見のお魚で遊ぶ、スマホ対応のコインゲーム。">
+<title>イワシんカジノ｜氷見の海で運だめし</title>
+<style>
+:root{color-scheme:dark;--navy:#071b32;--deep:#0b2945;--panel:#103655;--line:#2c5c77;--cream:#fff5d6;--muted:#b6d0dc;--cyan:#63e4df;--yellow:#ffd76a;--pink:#ff8e8a;--green:#a7f0c0}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#1b5675 0,#0b2945 46%,#06182a 100%);color:var(--cream);font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.shell{max-width:1040px;margin:auto;padding:16px 16px 40px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #ffffff20;background:#071b32cc;border-radius:18px;padding:12px 16px;position:sticky;top:8px;z-index:3;backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:clamp(18px,4vw,25px);letter-spacing:.03em}.mascot{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:linear-gradient(145deg,#9af2e9,#52b7ca);font-size:25px;box-shadow:0 0 22px #63e4df55}
+.balance{display:flex;align-items:center;gap:8px;padding:9px 13px;border-radius:14px;background:#173a54;font-weight:800;white-space:nowrap}.balance b{color:var(--yellow);font-size:19px}
+.hero{text-align:center;padding:35px 12px 22px}.eyebrow{color:var(--cyan);font-weight:800;letter-spacing:.16em;font-size:12px}.hero h1{font-size:clamp(30px,7vw,54px);line-height:1.12;margin:9px 0 8px;text-shadow:0 5px 24px #0005}.hero p{margin:0;color:var(--muted);font-size:15px}
+.notice{max-width:690px;margin:0 auto 20px;padding:10px 14px;border:1px solid #63e4df50;border-radius:12px;color:#d6f3ee;background:#0e3446;font-size:12px;text-align:center}
+.game-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:0 0 14px}
+.tab{border:1px solid var(--line);border-radius:14px;background:#0d2b46;padding:12px 6px;font-weight:800;color:var(--muted);transition:.2s}.tab span{display:block;font-size:21px;margin-bottom:2px}.tab.active{background:linear-gradient(145deg,#1e6777,#14415f);color:white;border-color:var(--cyan);box-shadow:0 0 18px #63e4df20}
+.panel{background:linear-gradient(155deg,#123957,#0c2945);border:1px solid #ffffff1a;border-radius:22px;padding:clamp(17px,4vw,30px);box-shadow:0 18px 50px #0003;min-height:365px}
+.game-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:19px}.game-head h2{margin:0;font-size:24px}.game-head p{margin:5px 0 0;color:var(--muted);font-size:13px}.tag{border:1px solid #47728a;background:#0b2945;border-radius:99px;padding:6px 10px;color:var(--cyan);font-size:12px;white-space:nowrap}
+.section-label{font-size:13px;color:var(--muted);font-weight:700;margin:18px 0 9px}
+.fish-picks{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.fish-pick{border:1px solid var(--line);background:#0a2842;border-radius:14px;padding:12px 4px 10px;min-height:78px;font-weight:800;transition:.16s}.fish-pick .emoji{display:block;font-size:27px;margin-bottom:4px}.fish-pick.selected{border-color:var(--yellow);background:#4a482f;box-shadow:0 0 0 2px #ffd76a33}
+.stakes{display:flex;gap:8px;flex-wrap:wrap}.stake{border:1px solid var(--line);border-radius:99px;background:#0b2945;padding:8px 15px;font-weight:800}.stake.selected{color:#1a2c36;background:var(--yellow);border-color:var(--yellow)}
+.actions{display:flex;align-items:center;gap:12px;margin-top:19px;flex-wrap:wrap}.play{border:0;border-radius:13px;padding:12px 24px;color:#102b3d;font-weight:900;background:linear-gradient(120deg,#ffe48a,#ffc54e);box-shadow:0 5px 0 #b88931;transition:.12s}.play:hover{transform:translateY(-1px);filter:brightness(1.05)}.play:active{transform:translateY(2px);box-shadow:0 2px 0 #b88931}.play:disabled{opacity:.45;cursor:not-allowed;transform:none}.result{min-height:25px;color:var(--cyan);font-weight:800}.result.win{color:var(--yellow)}.result.lose{color:#ffaaa5}
+.roulette-display{display:grid;place-items:center;min-height:115px;border:1px dashed #4c7990;border-radius:16px;background:#0a2942;margin-top:16px}.roulette-display .fish-result{font-size:46px;animation:pop .5s ease}.roulette-display small{display:block;color:var(--muted);margin-top:5px;text-align:center}
+@keyframes pop{0%{transform:scale(.4) rotate(-15deg);opacity:0}80%{transform:scale(1.18)}100%{transform:scale(1);opacity:1}}
+.slot-machine{display:flex;justify-content:center;gap:10px;padding:22px 10px;background:#09253e;border:1px solid var(--line);border-radius:18px}.reel{display:grid;place-items:center;width:min(22vw,92px);height:min(22vw,92px);font-size:clamp(36px,9vw,58px);background:linear-gradient(#f9eed3,#ded3b3);border-radius:15px;box-shadow:inset 0 4px 10px #5555,0 4px 0 #527086}
+.card-table{display:flex;align-items:center;justify-content:center;gap:clamp(15px,5vw,54px);min-height:150px;background:radial-gradient(ellipse,#145b62,#0a293f 70%);border:1px solid #437c82;border-radius:18px}.playing-card{width:82px;height:112px;border-radius:12px;background:#fff8e8;color:#172f43;display:grid;place-items:center;font-size:31px;font-weight:900;box-shadow:0 8px 20px #0005;transform:rotate(-3deg)}.playing-card.right{transform:rotate(3deg)}.vs{font-weight:900;color:var(--yellow)}
+.store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.prize{border:1px solid var(--line);border-radius:16px;background:#0b2945;padding:16px 12px;text-align:center}.prize .emoji{font-size:36px}.prize h3{font-size:15px;margin:7px 0 4px}.prize p{font-size:12px;color:var(--muted);min-height:35px;margin:0 0 10px}.prize .cost{color:var(--yellow);font-weight:900}.prize button{display:block;margin:10px auto 0;border:1px solid #638397;border-radius:9px;background:#143b56;padding:7px 11px;font-size:12px}.prize button:disabled{opacity:.55;cursor:default}
+footer{text-align:center;color:#90aebb;font-size:11px;padding:22px 10px 0}.reset{border:0;background:none;color:#7da0b2;text-decoration:underline;font-size:11px;margin-top:6px}
+.modal-backdrop{position:fixed;inset:0;background:#02101dcc;display:grid;place-items:center;padding:18px;z-index:9}.modal{width:min(420px,100%);border:1px solid #5fa2ad;background:#103552;border-radius:20px;padding:24px;text-align:center;box-shadow:0 20px 70px #0008}.modal .emoji{font-size:40px}.modal h2{margin:6px 0}.modal p{color:var(--muted);line-height:1.7}.modal button{border:0;border-radius:11px;background:var(--yellow);color:#15344a;padding:10px 25px;font-weight:900}
+@media(max-width:600px){.shell{padding:10px 11px 28px}header{padding:9px 11px;top:5px}.mascot{width:36px;height:36px;font-size:21px}.balance{padding:7px 9px;font-size:12px}.balance b{font-size:16px}.hero{padding:28px 5px 18px}.hero p{font-size:13px}.game-tabs{gap:6px}.tab{padding:9px 3px;font-size:12px;border-radius:11px}.tab span{font-size:19px}.panel{border-radius:18px;min-height:390px}.game-head h2{font-size:21px}.tag{font-size:10px;padding:5px 7px}.fish-picks{gap:5px}.fish-pick{font-size:11px;min-height:70px}.fish-pick .emoji{font-size:24px}.store-grid{grid-template-columns:1fr}.prize{display:grid;grid-template-columns:48px 1fr auto;align-items:center;text-align:left;gap:8px;padding:11px}.prize .emoji{font-size:29px;grid-row:span 3}.prize h3{margin:0}.prize p{min-height:0;margin:2px 0}.prize button{grid-column:3;grid-row:1/4;margin:0}.prize .cost{font-size:12px}.actions{gap:9px}.play{padding:11px 17px}.roulette-display{min-height:100px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header><div class="brand"><span class="mascot" aria-hidden="true">🐟</span><span>イワシんカジノ</span></div><div class="balance" aria-live="polite">🪙 <span>コイン</span><b id="balance">500</b></div></header>
+<section class="hero"><div class="eyebrow">HIMI FISHING FUN</div><h1>氷見の海で、運だめし！</h1><p>お魚ゲームでコインを集めよう</p></section>
+<div class="notice">このゲームは遊び用コインのデモです。お金を賭けたり、コインを換金したりすることはできません。</div>
+<nav class="game-tabs" aria-label="ゲーム選択">
+<button class="tab active" data-view="roulette"><span>🎡</span>お魚ルーレット</button>
+<button class="tab" data-view="slots"><span>🎰</span>フィッシュスロット</button>
+<button class="tab" data-view="cards"><span>🃏</span>お魚カード</button>
+<button class="tab" data-view="store"><span>🎁</span>景品コーナー</button>
+</nav>
+<main class="panel" id="panel"></main>
+<footer>コインはこの端末のブラウザーに保存されます。ほかの端末への引き継ぎはできません。<br><button class="reset" id="reset">コインを初期化する</button></footer>
+</div>
+<div id="modal-root"></div>
+<script>
+const fish=[
+ {name:"ブリ",emoji:"🐟"},{name:"イカ",emoji:"🦑"},{name:"カニ",emoji:"🦀"},{name:"ホタテ",emoji:"🐚"},{name:"フグ",emoji:"🐡"}
+];
+const prizes=[
+ {emoji:"🐟",name:"イワシんステッカー",desc:"イワシんのワンポイントステッカー",cost:2500},
+ {emoji:"🧲",name:"氷見のお魚マグネット",desc:"お魚モチーフのマグネット",cost:5000},
+ {emoji:"🎁",name:"みりん干しセット",desc:"中村海産の人気商品セット",cost:10000}
+];
+const saved=Number(localStorage.getItem("iwashinCasinoCoins"));
+let coins=Number.isFinite(saved)&&saved>=0?saved:500;
+let activeView="roulette",selectedFish=0,stake=25;
+const panel=document.getElementById("panel");
+function save(){localStorage.setItem("iwashinCasinoCoins",String(coins));document.getElementById("balance").textContent=coins.toLocaleString("ja-JP")}
+function setResult(text,type=""){const e=document.getElementById("result");if(e){e.textContent=text;e.className="result "+type}}
+function insufficient(){return coins<stake}
+function stakeControls(){return '<div class="section-label">コインを選ぶ</div><div class="stakes">'+[10,25,50].map(n=>'<button class="stake '+(stake===n?'selected':'')+'" data-stake="'+n+'">'+n+' コイン</button>').join("")+'</div>'}
+function renderRoulette(){
+ panel.innerHTML='<div class="game-head"><div><h2>🎡 お魚ルーレット</h2><p>好きなお魚を選んで、出目を予想しよう</p></div><span class="tag">的中で 3 倍</span></div>'+
+ '<div class="section-label">どのお魚にする？</div><div class="fish-picks">'+fish.map((f,i)=>'<button class="fish-pick '+(selectedFish===i?'selected':'')+'" data-fish="'+i+'"><span class="emoji">'+f.emoji+'</span>'+f.name+'</button>').join("")+'</div>'+
+ stakeControls()+'<div class="actions"><button class="play" id="play" '+(insufficient()?'disabled':'')+'>ルーレットを回す</button><span id="result" class="result">当たるとコインが3倍！</span></div><div class="roulette-display" id="wheel"><div><div class="fish-result">🌊</div><small>氷見の海からお魚がやってくる！</small></div></div>';
+}
+function renderSlots(){panel.innerHTML='<div class="game-head"><div><h2>🎰 フィッシュスロット</h2><p>3つのお魚をそろえてコインをゲット</p></div><span class="tag">3 個そろうと 10 倍</span></div>'+
+ '<div class="slot-machine" aria-label="スロット"><div class="reel" id="r0">🐟</div><div class="reel" id="r1">🦑</div><div class="reel" id="r2">🦀</div></div>'+
+ '<div class="actions"><button class="play" id="play" '+(coins<20?'disabled':'')+'>20コインで回す</button><span id="result" class="result">2つそろうと2倍、3つなら10倍！</span></div><div class="section-label">お魚がそろうかな？</div>'}
+function renderCards(){panel.innerHTML='<div class="game-head"><div><h2>🃏 お魚ハイカード</h2><p>イワシんとカード勝負！数字が大きい方の勝ち</p></div><span class="tag">勝ったら 2 倍</span></div>'+
+ '<div class="card-table"><div class="playing-card" id="player-card">🐟</div><div class="vs">VS</div><div class="playing-card right" id="house-card">🐡</div></div>'+
+ '<div class="actions"><button class="play" id="play" '+(coins<25?'disabled':'')+'>25コインで勝負</button><span id="result" class="result">Aが一番強いカード！</span></div>'}
+function renderStore(){panel.innerHTML='<div class="game-head"><div><h2>🎁 景品コーナー</h2><p>コインをためて、景品をチェックしよう</p></div><span class="tag">店頭交換の準備中</span></div>'+
+ '<div class="store-grid">'+prizes.map(p=>'<article class="prize"><div class="emoji">'+p.emoji+'</div><h3>'+p.name+'</h3><p>'+p.desc+'</p><div class="cost">'+p.cost.toLocaleString('ja-JP')+' コイン</div><button disabled>交換受付は準備中</button></article>').join("")+'</div>'+
+ '<div class="section-label">※ここは景品イメージの展示です。実際の交換はまだできません。</div>'}
+function render(){save();if(activeView==="roulette")renderRoulette();if(activeView==="slots")renderSlots();if(activeView==="cards")renderCards();if(activeView==="store")renderStore()}
+function changeView(view){activeView=view;document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===view));render()}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>changeView(b.dataset.view)));
+panel.addEventListener("click",e=>{
+ const fs=e.target.closest("[data-fish]");if(fs){selectedFish=Number(fs.dataset.fish);render();return}
+ const st=e.target.closest("[data-stake]");if(st){stake=Number(st.dataset.stake);render();return}
+ if(e.target.id==="play"){if(activeView==="roulette")playRoulette();if(activeView==="slots")playSlots();if(activeView==="cards")playCards()}
+});
+function playRoulette(){
+ if(coins<stake)return;coins-=stake;save();const btn=document.getElementById("play");btn.disabled=true;setResult("ルーレットが回転中…");
+ const box=document.getElementById("wheel"),small=box.querySelector("small"),icon=box.querySelector(".fish-result");let ticks=0;
+ const timer=setInterval(()=>{const f=fish[Math.floor(Math.random()*fish.length)];icon.textContent=f.emoji;small.textContent=f.name+" が通りすぎた…";ticks++;if(ticks>=12){clearInterval(timer);const result=fish[Math.floor(Math.random()*fish.length)];icon.textContent=result.emoji;small.textContent="出たのは「"+result.name+"」！";if(fish[selectedFish].name===result.name){const prize=stake*3;coins+=prize;setResult("的中！ "+prize+"コイン獲得！","win")}else setResult("はずれ…また挑戦してね","lose");save();btn.disabled=coins<stake}},75)
+}
+function playSlots(){
+ const cost=20;if(coins<cost)return;coins-=cost;save();const btn=document.getElementById("play");btn.disabled=true;setResult("お魚がそろうかな…");
+ const reels=[0,1,2].map(i=>document.getElementById("r"+i));let ticks=0;const timer=setInterval(()=>{reels.forEach(r=>r.textContent=fish[Math.floor(Math.random()*fish.length)].emoji);ticks++;if(ticks>10){clearInterval(timer);const ids=reels.map(()=>Math.floor(Math.random()*fish.length));reels.forEach((r,i)=>r.textContent=fish[ids[i]].emoji);const counts=ids.reduce((a,n)=>(a[n]=(a[n]||0)+1,a),{});const max=Math.max(...Object.values(counts));if(max===3){coins+=200;setResult("大当たり！ 200コイン獲得！","win")}else if(max===2){coins+=40;setResult("おしい！ 40コイン獲得！","win")}else setResult("ざんねん…次こそそろえよう","lose");save();btn.disabled=coins<20}},80)
+}
+function playCards(){
+ const cost=25;if(coins<cost)return;coins-=cost;save();const btn=document.getElementById("play");btn.disabled=true;setResult("カードを配っています…");
+ const pc=document.getElementById("player-card"),hc=document.getElementById("house-card");let ticks=0;const timer=setInterval(()=>{pc.textContent=["🐟","🦑","🦀","🐚","🐡"][Math.floor(Math.random()*5)];hc.textContent=["🐟","🦑","🦀","🐚","🐡"][Math.floor(Math.random()*5)];ticks++;if(ticks>9){clearInterval(timer);const a=1+Math.floor(Math.random()*13),b=1+Math.floor(Math.random()*13),icons=["🐟","🦑","🦀","🐚","🐡"];pc.textContent=(a===1?"A":a)+icons[Math.floor(Math.random()*5)];hc.textContent=(b===1?"A":b)+icons[Math.floor(Math.random()*5)];if(a>b){coins+=50;setResult("勝ち！ 50コイン獲得！","win")}else if(a===b){coins+=25;setResult("引き分け。コインを返却！","")}else setResult("イワシんの勝ち…もう一勝負！","lose");save();btn.disabled=coins<25}},90)
+}
+document.getElementById("reset").addEventListener("click",()=>showModal("コインを初期化しますか？","残高が500コインに戻ります。","🔄",()=>{coins=500;save();render()}));
+function showModal(title,body,emoji,action){const root=document.getElementById("modal-root");root.innerHTML='<div class="modal-backdrop" role="dialog" aria-modal="true"><div class="modal"><div class="emoji">'+emoji+'</div><h2>'+title+'</h2><p>'+body+'</p><button id="modal-ok">OK</button> <button id="modal-cancel" style="background:#31566c;color:white">戻る</button></div></div>';root.querySelector("#modal-ok").onclick=()=>{action();root.innerHTML=""};root.querySelector("#modal-cancel").onclick=()=>root.innerHTML="";root.querySelector(".modal-backdrop").onclick=e=>{if(e.target===e.currentTarget)root.innerHTML=""}}
+render();
+</script>
+</body>
+</html>
