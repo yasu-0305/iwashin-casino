@@ -59,8 +59,9 @@ const prizes=[
  {emoji:"🧲",name:"氷見のお魚マグネット",desc:"お魚モチーフのマグネット",cost:5000},
  {emoji:"🎁",name:"みりん干しセット",desc:"中村海産の人気商品セット",cost:10000}
 ];
-const saved=Number(localStorage.getItem("iwashinCasinoCoins"));
-let coins=Number.isFinite(saved)&&saved>=0?saved:500;
+const rawSaved=localStorage.getItem("iwashinCasinoCoins");
+const parsedSaved=rawSaved===null?NaN:Number(rawSaved);
+let coins=Number.isFinite(parsedSaved)&&parsedSaved>=0?parsedSaved:500;
 let activeView="roulette",selectedFish=0,stake=25;
 const panel=document.getElementById("panel");
 function save(){localStorage.setItem("iwashinCasinoCoins",String(coins));document.getElementById("balance").textContent=coins.toLocaleString("ja-JP")}
